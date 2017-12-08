@@ -50,16 +50,24 @@ read answer1
 if [ $answer1 = 1 ]; then
 	sudo apt-get install openssh-server -y
 	sudo service ssh start
+	sudo ufw allow 22/tcp
+	sudo ufw allow 22
 else
 	sudo apt-get remove openssh-server -y
+	sudo ufw deny 22/tcp
+	sudo ufw deny 22
 fi
 echo -n "Enable vsftpd? 1 for yes. "
 read answer2
 if [ $answer2 = 1 ]; then
 	sudo apt-get install vsftpd -y
 	sudo service vsftpd start
+	sudo ufw allow 21/tcp
+	sudo ufw allow 21
 else
 	sudo apt-get remove vsftpd -y
+	sudo ufw deny 21/tcp
+	sudo ufw deny 21
 fi
 echo -n "Enable samba? 1 for yes. "
 read answer3
@@ -67,16 +75,24 @@ if [ $answer3 = 1 ]; then
 	sudo apt-get install samba -y
 	sudo service smbd start
 	sudo service samba start
+	sudo ufw allow 445/tcp
+	sudo ufw allow 445
 else
 	sudo apt-get remove samba -y
+	sudo ufw deny 445/tcp
+	sudo ufw deny 445
 fi
 echo -n "Enable Apache2? 1 for yes. "
 read answer4
 if [ $answer4 = 1 ]; then
 	sudo apt-get install apache2 -y
 	sudo service apache2 start
+	sudo ufw allow 80/tcp
+	sudo ufw allow 80
 else
 	sudo apt-get remove apache2 -y
+	sudo ufw deny 80/tcp
+	sudo ufw deny 80
 fi
 echo -n "Enable PHP? 1 for yes. "
 read answer5
