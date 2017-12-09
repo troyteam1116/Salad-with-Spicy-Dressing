@@ -4,6 +4,8 @@
 #This script manages users, deletes potentially dangerous software, enables a firewall, manages services, does config management, manages network, deletes non-work related media files, and performs system
 #updates.
 
+#Updates the software lists
+sudo apt-get update
 #Lists all users
 cat /etc/passwd
 #Adds and deletes users
