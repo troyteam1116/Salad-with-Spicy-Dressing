@@ -1,0 +1,139 @@
+#!/bin/bash
+#This script was made by Clemence Yi.
+#The purpose of this script is to greatly reduce the amount of time it takes to gain points in the Cyber Patriot competition.
+#This script manages users, deletes potentially dangerous software, enables a firewall, manages services, does config management, manages network, deletes non-work related media files, and performs system
+#updates.
+
+#Updates the software lists
+sudo apt-get update
+#Lists all users
+cat /etc/passwd > userlist
+#Removes potentially harmful software
+sudo apt-get remove john -y
+sudo apt-get remove netcat* -y
+sudo apt-get remove bind9 -y
+sudo apt-get remove telnet* -y
+sudo apt-get remove iodine -y
+sudo apt-get remove kismet -y
+sudo apt-get remove medusa -y
+sudo apt-get remove hydra -y
+sudo apt-get remove fcrackzip -y
+sudo apt-get remove ayttm -y
+sudo apt-get remove empathy -y
+sudo apt-get remove nikto -y
+sudo apt-get remove logkeys -y
+sudo apt-get remove vino -y
+sudo apt-get remove tightvncserver -y
+sudo apt-get remove rdesktop -y
+sudo apt-get remove remmina -y
+sudo apt-get remove vinagre -y
+sudo apt-get remove rsync -y
+sudo apt-get remove ettercap -y
+sudo apt-get purge john -y
+sudo apt-get purge netcat* -y
+sudo apt-get purge bind9 -y
+sudo apt-get purge telnet* -y
+sudo apt-get purge iodine -y
+sudo apt-get purge kismet -y
+sudo apt-get purge medusa -y
+sudo apt-get purge hydra -y
+sudo apt-get purge fcrackzip -y
+sudo apt-get purge ayttm -y
+sudo apt-get purge empathy -y
+sudo apt-get purge nikto -y
+sudo apt-get purge logkeys -y
+sudo apt-get purge vino -y
+sudo apt-get purge tightvncserver -y
+sudo apt-get purge rdesktop -y
+sudo apt-get purge remmina -y
+sudo apt-get purge vinagre -y
+sudo apt-get purge rsync -y
+sudo apt-get purge ettercap -y
+sudo apt-get autoremove -y
+#Gives a break before continuing
+sleep 10
+#Installs and enables ufw
+sudo apt-get install ufw -y
+sudo ufw enable
+#Installs/removes various software
+#!/bin/bash
+var1=$( grep -io --max-count=1 'ssh' README )
+var2=$( grep -io --max-count=1 'samba' README )
+var3=$( grep -io --max-count=1 'apache2' README )
+var5=$( grep -io --max-count=1 'vsftpd' README )
+var6=$( grep -io --max-count=1 'php' README )
+if [ -n $var1 ]; then
+	sudo apt-get install openssh-server -y
+else
+	sudo apt-get remove openssh-server -y
+fi
+if [ $var2 ]; then
+	sudo apt-get install samba -y
+else
+	sudo apt-get remove samba -y
+fi
+if [ $var3 ]; then
+	sudo apt-get install apache2 -y
+else
+	sudo apt-get remove apache2 -y
+fi
+if [ $var5 ]; then
+	sudo apt-get install vsftpd -y
+else
+	sudo apt-get remove vsftpd -y
+fi
+if [ $var6 ]; then
+	sudo apt-get install php5 -y
+else
+	sudo apt-get remove php5 -y
+fi
+#This disables the root account login
+sudo passwd -l root
+#These commands copy config files to the desired location
+sudo cp login.defs /etc
+sudo cp sshd_config /etc/ssh
+sudo cp common-password /etc/pam.d
+sudo cp lightdm.conf /etc/lightdm
+sudo cp common-auth /etc/pam.d
+sudo cp sysctl.conf /etc
+#Reloads sysctl
+sudo sysctl -p
+#Finds and deletes non-work related media files
+sudo find /home . -name "*.mp3" -delete
+sudo find /home . -name "*.mp4" -delete
+sudo find /home . -name "*.wav" -delete
+sudo find /home . -name "*.jpg" -delete
+sudo find /home . -name "*.png" -delete
+sudo find /home . -name "*.m4a" -delete
+sudo find /home . -name "*.m4b" -delete
+sudo find /home . -name "*.aif" -delete
+sudo find /home . -name "*.iff" -delete
+sudo find /home . -name "*.m3u" -delete
+sudo find /home . -name "*.mid" -delete
+sudo find /home . -name "*.mpa" -delete
+sudo find /home . -name "*.wma" -delete
+sudo find /home . -name "*.3g2" -delete
+sudo find /home . -name "*.3gp" -delete
+sudo find /home . -name "*.asf" -delete
+sudo find /home . -name "*.avi" -delete
+sudo find /home . -name "*.flv" -delete
+sudo find /home . -name "*.m4v" -delete
+sudo find /home . -name "*.mov" -delete
+sudo find /home . -name "*.mpg" -delete
+sudo find /home . -name "*.rm" -delete
+sudo find /home . -name "*.srt" -delete
+sudo find /home . -name "*.swf" -delete
+sudo find /home . -name "*.vof" -delete
+sudo find /home . -name "*.wmv" -delete
+sudo find /home . -name "*.gif" -delete
+#Finds potentially hazardous files
+sudo find / . -name "*.html"
+sudo find / . -name "*.php"
+#Lists the html file in /var/www/html
+cat /var/www/html/index.html
+#Gives a quick break before upgrade
+sleep 5
+#Does an upgrade
+sudo apt-get upgrade -y
+#Reboots
+sudo reboot
