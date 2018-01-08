@@ -53,16 +53,16 @@ sudo apt-get autoremove -y
 #Gives a break before continuing
 sleep 10
 #Installs and enables ufw
-sudo apt-get install ufw -y
+sudo apt-get install gufw -y
 sudo ufw enable
 #Installs/removes various software
 #!/bin/bash
 var1=$( grep -io --max-count=1 'ssh' README )
 var2=$( grep -io --max-count=1 'samba' README )
 var3=$( grep -io --max-count=1 'apache2' README )
-var5=$( grep -io --max-count=1 'vsftpd' README )
+var5=$( grep -io --max-count=1 'ftp' README )
 var6=$( grep -io --max-count=1 'php' README )
-if [ -n $var1 ]; then
+if [ $var1 ]; then
 	sudo apt-get install openssh-server -y
 else
 	sudo apt-get remove openssh-server -y
@@ -130,7 +130,10 @@ sudo find /home . -name "*.gif" -delete
 sudo find / . -name "*.html"
 sudo find / . -name "*.php"
 #Lists the html file in /var/www/html
-cat /var/www/html/index.html
+cat /var/www/html/index.html > cat1
+#Cats other files
+cat /etc/passwd > cat2
+cat /etc/crontab > cat3
 #Gives a quick break before upgrade
 sleep 5
 #Does an upgrade
