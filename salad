@@ -56,7 +56,6 @@ sleep 10
 sudo apt-get install gufw -y
 sudo ufw enable
 #Installs/removes various software
-#!/bin/bash
 var1=$( grep -io --max-count=1 'ssh' README )
 var2=$( grep -io --max-count=1 'samba' README )
 var3=$( grep -io --max-count=1 'apache2' README )
