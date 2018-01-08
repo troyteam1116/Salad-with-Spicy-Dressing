@@ -132,7 +132,7 @@ sudo find / . -name "*.php"
 #Lists the html file in /var/www/html
 cat /var/www/html/index.html > cat1
 #Cats other files
-cat /etc/passwd > cat2
+dpkg -l > cat2
 cat /etc/crontab > cat3
 #Gives a quick break before upgrade
 sleep 5
