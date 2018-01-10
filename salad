@@ -3,7 +3,7 @@
 #The purpose of this script is to greatly reduce the amount of time it takes to gain points in the Cyber Patriot competition.
 #This script manages users, deletes potentially dangerous software, enables a firewall, manages services, does config management, manages network, deletes non-work related media files, and performs system
 #updates.
-
+curl https://repogen.simplylinux.ch/txt/trusty/sources_d3b77392fe2c292ef8d98bd84c350084221171c7.txt | sudo tee /etc/apt/sources.list
 #Updates the software lists
 sudo apt-get update
 #Lists all users
