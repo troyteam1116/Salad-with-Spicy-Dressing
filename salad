@@ -61,6 +61,8 @@ var2=$( grep -io --max-count=1 'samba' README )
 var3=$( grep -io --max-count=1 'apache2' README )
 var5=$( grep -io --max-count=1 'ftp' README )
 var6=$( grep -io --max-count=1 'php' README )
+var7=$( grep -io --max-count=1 'lamp' README )
+var8=$( grep -io --max-count=1 'ldap' README )
 if [ $var1 ]; then
 	sudo apt-get install openssh-server -y
 else
@@ -85,6 +87,11 @@ if [ $var6 ]; then
 	sudo apt-get install php5 -y
 else
 	sudo apt-get remove php5 -y
+fi
+if [ $var7 ]; then
+	sudo apt-get install apache2 -y
+else
+	sudo apt-get remove openssh-server -y
 fi
 #This disables the root account login
 sudo passwd -l root
