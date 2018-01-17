@@ -3,7 +3,6 @@
 #The purpose of this script is to greatly reduce the amount of time it takes to gain points in the Cyber Patriot competition.
 #This script manages users, deletes potentially dangerous software, enables a firewall, manages services, does config management, manages network, deletes non-work related media files, and performs system
 #updates.
-curl https://repogen.simplylinux.ch/txt/trusty/sources_d3b77392fe2c292ef8d98bd84c350084221171c7.txt | sudo tee /etc/apt/sources.list
 #Updates the software lists
 sudo apt-get update
 #Lists all users
@@ -55,44 +54,6 @@ sleep 10
 #Installs and enables ufw
 sudo apt-get install gufw -y
 sudo ufw enable
-#Installs/removes various software
-var1=$( grep -io --max-count=1 'ssh' README )
-var2=$( grep -io --max-count=1 'samba' README )
-var3=$( grep -io --max-count=1 'apache2' README )
-var5=$( grep -io --max-count=1 'ftp' README )
-var6=$( grep -io --max-count=1 'php' README )
-var7=$( grep -io --max-count=1 'lamp' README )
-var8=$( grep -io --max-count=1 'ldap' README )
-if [ $var1 ]; then
-	sudo apt-get install openssh-server -y
-else
-	sudo apt-get remove openssh-server -y
-fi
-if [ $var2 ]; then
-	sudo apt-get install samba -y
-else
-	sudo apt-get remove samba -y
-fi
-if [ $var3 ]; then
-	sudo apt-get install apache2 -y
-else
-	sudo apt-get remove apache2 -y
-fi
-if [ $var5 ]; then
-	sudo apt-get install vsftpd -y
-else
-	sudo apt-get remove vsftpd -y
-fi
-if [ $var6 ]; then
-	sudo apt-get install php5 -y
-else
-	sudo apt-get remove php5 -y
-fi
-if [ $var7 ]; then
-	sudo apt-get install apache2 -y
-else
-	sudo apt-get remove openssh-server -y
-fi
 #This disables the root account login
 sudo passwd -l root
 #These commands copy config files to the desired location
